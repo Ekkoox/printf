@@ -6,14 +6,16 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:06:09 by enschnei          #+#    #+#             */
-/*   Updated: 2023/11/22 18:37:17 by enschnei         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:22:34 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int check_format(const char *str)
+int check_format(char *str, va_list args)
 {
+	int len;
+	
 	if (str = 'c')
 		return(ft_putchar);
 	else if (str = 'd' || 'i')
@@ -21,27 +23,28 @@ int check_format(const char *str)
 	else if (str = 's')
 		return(ft_putstr);
 	else if (str = 'u')
-		return();
-	else if (str = 'x')
-		return();
+		return(ft_unsigned_putnbr);
+	else if (str = 'x' || 'X')
+		return(ft_hexa_base);
 	else if (str = 'p')
-		return();	
+		return();
+	else if (str = '%')
+		return('%');
+	return(1);
 }
 
 int ft_prinft(const char *str, ...)
 {
 	va_list args;
-	int count;
+	int i;
 	
 	va_start(args, str);
-	int i;
 
 	i = 0;
-	count = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
-			check_format(str);
+			check_format(str, args);
 		else
 			ft_putstr(str); 
 		i++;	

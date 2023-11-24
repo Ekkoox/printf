@@ -6,34 +6,34 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:06:09 by enschnei          #+#    #+#             */
-/*   Updated: 2023/11/23 18:22:34 by enschnei         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:26:48 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int check_format(char *str, va_list args)
+int check_format(char c, va_list args)
 {
 	int len;
 	
-	if (str = 'c')
+	if (c == 'c')
 		return(ft_putchar);
-	else if (str = 'd' || 'i')
+	if (c == 'd' || 'i')
 		return(ft_putnbr);
-	else if (str = 's')
+	if (c == 's')
 		return(ft_putstr);
-	else if (str = 'u')
+	if (c == 'u')
 		return(ft_unsigned_putnbr);
-	else if (str = 'x' || 'X')
+	if (c == 'x' || 'X')
 		return(ft_hexa_base);
-	else if (str = 'p')
+	if (c == 'p')
 		return();
-	else if (str = '%')
+	if (c == '%')
 		return('%');
 	return(1);
 }
 
-int ft_prinft(const char *str, ...)
+int ft_printf(const char *str, ...)
 {
 	va_list args;
 	int i;
@@ -50,4 +50,14 @@ int ft_prinft(const char *str, ...)
 		i++;	
 	}
 	va_end(args);
+}
+
+int main()
+{
+	char *str = "Enzo";
+
+	ft_printf("Je suis %s\n"));
+	printf("Je suis %s" putstr(str);
+	return(0);
+
 }

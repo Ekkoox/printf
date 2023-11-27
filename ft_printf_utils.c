@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:05:59 by enschnei          #+#    #+#             */
-/*   Updated: 2023/11/23 18:06:43 by enschnei         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:21:28 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int ft_putchar(char c)
 	return(1);
 }
 
-int ft_putstr(char *str)
+int ft_putstr(const char *str)
 {
 	int i;
 
@@ -31,37 +31,32 @@ int ft_putstr(char *str)
 	return (i);
 }
 
-static int	ft_putnbr_len(int n)	
-{
-	int	len;
-	
-	len  = 0;
-	if (n > 9)
-		len += ft_putnbr(n / 10);
-	len += ft_putchar(n % 10 + 48);
-	return (len);
-}
 
-int	ft_putnbr(int n)
+int	ft_putnbr(long int n, int *len)
 {
 	if (n == -2147483648)
 	{
 		ft_putstr("-2147483648");
-		return(ft_putstr(-2147483648));
+		return(ft_putchar("-2147483648"));
 	}
 	if (n < 0)
 	{
-		ft_putchar('-');
 		n = -n;
+		*len += ft_putchar('-');
 	}
 	if (n > 9)
-		ft_putnbr_len(n / 10);
-	ft_putchar(n % 10 + 48);
+		ft_putnbr(n / 10, len);
+	*len += ft_putchar(n % 10 + 48);
+	return(len);
 }
 
-int ft_unsigned_putnbr(int n)
-{
-	if (n > 0)
+unsigned int	ft_putnbr_unsigned(int n)	
+{	
+	int len;
+	
+	len = 0;
+	if (n > 9)
 		ft_putnbr_len(n / 10);
-	ft_putchar(n % 10 + 48);
+	len += ft_putchar(n % 10 + 48);
+	return (len);
 }

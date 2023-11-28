@@ -6,52 +6,30 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:06:09 by enschnei          #+#    #+#             */
-/*   Updated: 2023/11/27 17:22:40 by enschnei         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:45:17 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-// int check_format(char c)
-// {
-// 	va_list args;
-// 	int len;
-	
-// 	if (c == 'c')
-// 		return((int*)ft_putchar);
-// 	if (c == 'd' || 'i')
-// 		return((int*)ft_putnbr);
-// 	if (c == 's')
-// 		return((int*)ft_putstr);
-// 	if (c == 'u')
-// 		return((int*)ft_unsigned_putnbr);
-// 	if (c == 'x' || 'X')
-// 		return((int*) ft_hexa_base);
-// 	if (c == 'p')
-// 		return((int*) ft_hexa_base_p);
-// 	if (c == '%')
-// 		return('%');
-// 	return(1);
-// }
+#include "ft_printf.h"
 
 int	check_format(char c, va_list args)
 {
 	int	len;
 
 	len = 0;
-	if (c == 'c')
+	if (c == 'c') //ca marche
 		return (ft_putchar(va_arg(args, int)));
-	if (c == 's')
+	if (c == 's') //ca marche
 		return (ft_putstr(va_arg(args, char *)));
-	if (c == 'i' || c == 'd')
+	if (c == 'i' || c == 'd') //ca marche
 		return (ft_putnbr(va_arg(args, int), &len));
-	if (c == 'u')
+	if (c == 'u') // ca marche
 		return (ft_putnbr_unsigned(va_arg(args, unsigned int)));
-//	if (c == 'x' || c == 'X')
-//		return();
-//	if (c == 'p')
-//		return (ft_hexa_base_p(va_arg(args, void *)));
-	if (c == '%')
+	if (c == 'x' || c == 'X') // ca marche
+		return(ft_hexa_base(va_arg(args, unsigned int), c));
+	if (c == 'p') // ca marche pas
+		return(ft_hexa_p((uintptr_t)va_arg(args, void *)));
+	if (c == '%') // ca marche
 		return (ft_putchar('%'));
 	return (1);
 }
@@ -59,30 +37,32 @@ int	check_format(char c, va_list args)
 int ft_printf(const char *str, ...)
 {
 	va_list args;
-	int i;\
-	int len;0
+	int i;
+	int len;
 	
 	va_start(args, str);
 
 	i = 0;
+	len = 0;
 	if(!str)
 		return(-1);
 	while (str[i])
 	{
 		if (str[i] == '%')
-			check_format(str[i + 1], args);
+			len += check_format(str[++i], args);
 		else
-			ft_putstr(str); 
+			len += ft_putchar(str[i]);
 		i++;	
 	}
 	va_end(args);
+	return(len);
 }
 
-int main()
-{
-	char *str = "Enzo";
-
-	ft_printf("Je suis %s",str);
-	printf("Je suis %s",str);
-	return(0);
-}
+// int main()
+// {
+// 	char *str = NULL;
+	
+// 	printf("\n%d\n", ft_printf(" NULL %s NULL ", str));
+// //	printf("\n%d\n", printf(" NULL %s NULL ", str));
+// 	return(0);
+// }

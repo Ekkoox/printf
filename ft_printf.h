@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:06:16 by enschnei          #+#    #+#             */
-/*   Updated: 2023/11/28 18:29:52 by enschnei         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:12:23 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int				ft_hexa_base(unsigned int n, char c);
 int				check_format(char c, va_list args);
 int				ft_hexa_len(int n, char c);
 int				ft_putnbr(long int n, int *len);
-int				ft_hexa_p(uintptr_t n);
+int				ft_hexa_p(void *n);
 unsigned int	ft_putnbr_unsigned(unsigned int n);
-int				ft_hexa_base2(unsigned int n);
 
 #endif
 
